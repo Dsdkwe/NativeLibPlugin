@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "name": "PanVK Mali G925 Switch",
+  "displayName": "PanVK Mali G925 Switch (Kbase trace pandecode bypass)",
+  "displayVersion": "0.18.66-dev-kbase-trace-no-pandecode-20261017",
+  "packageVersion": "0.18.66-dev-kbase-trace-no-pandecode-20261017",
+  "id": "panvk-g925-v01866-kbase-trace-no-pandecode",
+  "author": "Local PanVK build",
+  "vendor": "Mesa",
+  "driverVersion": "26.3.0-devel",
+  "libraryName": "libvulkan_panfrost.so",
+  "librarySha256": "f9692b7902e4314a5b11a6b0530a1a8979a76d5a74f84008a1ca98cd23b8bfb7",
+  "minApi": 35,
+  "targetGpuId": "0xD8300010",
+  "kernelGpuId": "0xD8300015",
+  "targetPanArch": 13,
+  "frontend": "CSF",
+  "sourceCommit": "5a07217f034b3e50d8c7c7794f97a2df1742613b",
+  "patchSeriesId": "sha256:674367a6a9d40a8affe9a0ba6a3f1f0f6dbb220b8825e1ba2ff29c3d7d08be3b",
+  "companionLibraries": [
+    "libdrm.so",
+    "libc++.so"
+  ],
+  "bcCompatibility": {
+    "included": true,
+    "gpuRuntimeValidated": false,
+    "path": "Compute BC decode is the default; fragment BC decode requires PANVK_DEBUG=bc_gfx. Correctness and performance are not device-validated."
+  },
+  "kraid": {
+    "included": true,
+    "default": "all supported stages",
+    "runtimeValidated": false
+  },
+  "androidPresentModes": {
+    "advertised": [
+      "FIFO",
+      "IMMEDIATE",
+      "MAILBOX"
+    ],
+    "distinctQueueSchedulingSemantics": false,
+    "runtimeValidated": false
+  },
+  "schedulingControls": {
+    "extension": "VK_ARM_scheduling_controls",
+    "enabled": true,
+    "defaultPerQueueShaderCoreMaximum": "all physically reported shader cores",
+    "nonZeroApplicationShaderCoreCountHonored": true,
+    "coreReservationOrFullUtilizationGuaranteed": false,
+    "runtimeValidated": false
+  },
+  "dx12DescriptorFeatures": {
+    "extensions": [
+      "VK_EXT_descriptor_indexing",
+      "VK_EXT_mutable_descriptor_type",
+      "VK_KHR_shader_atomic_int64",
+      "VK_EXT_shader_atomic_float"
+    ],
+    "descriptorIndexingFeatures": [
+      "descriptorBindingPartiallyBound",
+      "runtimeDescriptorArray",
+      "shaderSampledImageArrayDynamicIndexing"
+    ],
+    "mutableDescriptorTypes": [
+      "SAMPLER",
+      "SAMPLED_IMAGE",
+      "STORAGE_IMAGE",
+      "INPUT_ATTACHMENT",
+      "UNIFORM_TEXEL_BUFFER",
+      "STORAGE_TEXEL_BUFFER",
+      "UNIFORM_BUFFER",
+      "STORAGE_BUFFER",
+      "COMBINED_IMAGE_SAMPLER"
+    ],
+    "combinedImageSamplerMutableTypeSupported": true,
+    "mutableCombinedDescriptorStorageSlots": 5,
+    "mutableNonCombinedDescriptorStorageSlots": 1,
+    "mutableCombinedWithUniformOrStorageBuffersSupported": false,
+    "re2MutableCombinedTest": "pending; v0.18.47 rollback remains user-tested as resolving the black screen/freeze observed with v0.18.46",
+    "atomicFeatures": [
+      "shaderBufferInt64Atomics",
+      "shaderSharedInt64Atomics",
+      "shaderBufferFloat32Atomics",
+      "shaderSharedFloat32Atomics"
+    ],
+    "runtimeValidated": false
+  },
+  "pipelineProtectedAccess": {
+    "extension": "VK_EXT_pipeline_protected_access",
+    "enabled": true,
+    "runtimeValidated": true,
+    "deviceCreateTest": "PanProbe enabled pipelineProtectedAccess successfully on OnePlus 2602BPC18G (Mali-G925)",
+    "protectedMemoryAvailable": false,
+    "protectedMemoryProbe": "Kbase query flags 0x280c did not include KBASE_REG_PROTECTED"
+  },
+  "switchEmulatorCompatibility": {
+    "packageFormat": "flat ADPKG driver ZIP",
+    "importTarget": "Switch emulator custom Vulkan driver import",
+    "runtimeValidated": false
+  },
+  "runtimeChecks": {
+    "androidIcdStaticValidation": "Android arm64/API 35 ICD compiled and linked with NDK r29 (Build ID 40b7ea68110a37e5dc576840737cac9e3b2d93a0); Android static validation passed and seven focused Kbase trace source tests pass. Device runtime tracing is not yet validated.",
+    "switchEmulatorImportAndRuntime": "not-tested",
+    "panProbeRuntime": "pipelineProtectedAccess query=true and device enable passed on OnePlus 2602BPC18G (Mali-G925); protectedMemory skipped because Kbase protected-region query returned 0x280c",
+    "bcImageCorrectnessAndPerformance": "Compute BC decode default is build-verified; device correctness/performance not tested.",
+    "gamePerformance": "not-tested",
+    "gameVisualGlitch": "Not evaluated by this change; no claim that rendering artifacts are fixed.",
+    "panvkDebugTrace": "Kbase trace buffers continue recording and submissions remain synchronous, but pandecode of CS binaries and trace records is skipped to avoid decoder crashes on incomplete Kbase GPU VA mappings. Device runtime validation pending."
+  },
+  "runtimeValidated": false,
+  "changeSummary": "Comprehensively skips pandecode of both command-stream binaries and hardware trace records on Kbase, addressing repeated unknown GPU VA crashes that moved across decoder fields. Trace recording and synchronous submission remain enabled. Non-Kbase decode behavior is unchanged. Device runtime validation pending.",
+  "description": "Experimental PanVK G925 test ICD. Kbase hardware CS tracing remains collected but pandecode binary and trace decoding is skipped to prevent crashes on incomplete GPU VA mappings; device validation pending.",
+  "profile": "g925-v13-csf",
+  "backend": "panvk-kbase",
+  "kernelInterface": "mali_kbase",
+  "abi": "android-aarch64-bionic",
+  "libraryBuildId": "40b7ea68110a37e5dc576840737cac9e3b2d93a0"
+}
