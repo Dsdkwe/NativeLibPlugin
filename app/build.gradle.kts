@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.commonlauncher.nativeplugin"
+    namespace = "com.dsdkwe.panvk.g925"
     compileSdk = 34
 
     signingConfigs {
@@ -17,7 +17,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.commonlauncher.nativeplugin"
+        applicationId = "com.dsdkwe.panvk.g925"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -27,39 +27,28 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("releaseBuild")
         }
         configureEach {
-            //应用名
-            //app name
-            resValue("string","app_name","XXX Plugin")
-            //包名后缀
-            //package name Suffix
-            applicationIdSuffix = ".xxx"
-
-            //插件包在启动器内显示的名称
-            //Plugin package display name within the launcher
-            manifestPlaceholders["des"] = ""
-
-            //JVM环境参数配置
-            //JVM environment parameter configuration
-            manifestPlaceholders["environment"] = mutableMapOf<String,String>().apply {
-//                put("example.plugin", "example")
-            }.run {
+            // 应用名
+            resValue("string", "app_name", "PanVK G925")
+            // 包名后缀
+            applicationIdSuffix = ".panvk_g925"
+            // 插件描述
+            manifestPlaceholders["des"] = "Mesa PanVK Driver for Mali G925 (Kbase CSF)"
+            // JVM 环境参数配置
+            manifestPlaceholders["environment"] = mutableMapOf<String, String>().run {
+                // 这里可以配置需要的环境变量，留空即可
                 buildList {
-                    this@run.forEach { (key, value) ->
-                        add("-D$key=$value")
-                    }
+                    this@run.forEach { (key, value) -> add("-D$key=$value") }
                 }.joinToString(" ")
             }
-
-            //最小支持的MC版本
-            //The minimum supported MC version
+            // 支持版本
             manifestPlaceholders["minMCVer"] = ""
-            //最大支持的MC版本
-            //The maximum supported MC version
             manifestPlaceholders["maxMCVer"] = ""
         }
     }
+    
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -70,5 +59,5 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }
