@@ -1,4 +1,4 @@
-package com.commonlauncher.nativeplugin
+package com.dsdkwe.panvk.g925
 
 import android.app.Activity
 import android.os.Bundle

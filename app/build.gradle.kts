@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dsdkwe.panvk.g925"
+    namespace = "com.commonlauncher.nativeplugin"
     compileSdk = 34
 
     signingConfigs {
@@ -17,7 +17,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.dsdkwe.panvk.g925"
+        applicationId = "com.commonlauncher.nativeplugin"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -32,18 +32,12 @@ android {
         configureEach {
             // 应用名
             resValue("string", "app_name", "PanVK G925")
-            // 包名后缀
-            applicationIdSuffix = ".panvk_g925"
-            // 插件描述
+            // 插件包在启动器内显示的名称
             manifestPlaceholders["des"] = "Mesa PanVK Driver for Mali G925 (Kbase CSF)"
-            // JVM 环境参数配置
-            manifestPlaceholders["environment"] = mutableMapOf<String, String>().run {
-                // 这里可以配置需要的环境变量，留空即可
-                buildList {
-                    this@run.forEach { (key, value) -> add("-D$key=$value") }
-                }.joinToString(" ")
-            }
-            // 支持版本
+            // JVM 环境参数配置 (如果需要特殊参数可以在这里加)
+            manifestPlaceholders["environment"] = ""
+            
+            // 最小和最大支持的 MC 版本 (留空表示不限制)
             manifestPlaceholders["minMCVer"] = ""
             manifestPlaceholders["maxMCVer"] = ""
         }
